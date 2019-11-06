@@ -1,11 +1,55 @@
-import React from 'react';
+import React, {useState} from 'react';
 
-import './Styles/MAIN.sass'
+//styles:
+import './Styles/MAIN.sass';
 
-const App = () => (
-    <section className = 'App'>
-        
-    </section>
-  );
+//components:
+import DairyAppTitle from './Components/DairyAppTitle/DairyAppTitle';
+import Tasks from './Components/Tasks/Tasks';
+import CustomHeader from './Components/GeneralComponents/CustomHeader'
+import NewTaskForm from './Components/GeneralComponents/NewTaskForm';
+import NewTaskInput from './Components/GeneralComponents/NewTaskInput';
+import SaveTaskBtn from './Components/GeneralComponents/SaveTaskBtn';
+import TaskItem from './Components/GeneralComponents/TaskItem';
+import NumberedDot from './Components/GeneralComponents/NumberedDot';
+import DeleteBtn from './Components/GeneralComponents/DeleteBtn'; 
+
+//custom hooks:
+import useLocalStorage from './Components/CustomHooks/useLocalStorage';
+
+const App = () => {
+	const {tasks} = useLocalStorage();
+	const [data, setData] = useState(tasks);
+
+	return(
+		<section className = 'App'>
+			<DairyAppTitle />
+	
+			<Tasks >
+				<CustomHeader 
+					index = {2}
+					content = 'Items' 
+					Class = 'TaskTitle'
+				/>
+
+				<NewTaskForm setData = {setData}>
+					<NewTaskInput />
+					<SaveTaskBtn />
+				</NewTaskForm>
+
+				{data.map(
+					(item) =>
+						<TaskItem key = {item.uuid}>		
+							<section className = 'TaskName'>{item.task}</section>
+
+							<NumberedDot number = {item.descriptionCount}/>
+							
+							<DeleteBtn uuid = {item.uuid} setData = {setData}/>
+						</TaskItem>
+				)}
+			</Tasks>
+		</section>
+	);
+};
 
 export default App;
