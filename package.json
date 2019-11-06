@@ -2,7 +2,7 @@
   "name": "test",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://AndriiKostiv.github.io/react-todo-list/",
+  "homepage": "http://AndriiKostiv.github.io/test/",
   "dependencies": {
     "gh-pages": "^2.1.1",
     "node-sass": "^4.13.0",
