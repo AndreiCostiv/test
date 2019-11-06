@@ -1,8 +1,13 @@
 import React from 'react';
 
-const TaskItem = ({children}) => {
+//custom hook:
+import useLocalStorage from '../CustomHooks/useLocalStorage';
+
+const TaskItem = ({children, uuid, setComments}) => {
+    const {getComments} = useLocalStorage();
+
     return(
-        <section className = {`TaskItem`}>
+        <section className = {`TaskItem`} onClick = {() =>  setComments(getComments(uuid))}>
             {children}
         </section>
     );

@@ -14,18 +14,25 @@ const NewTasksForm = ({children, setData}) => {
 
         let taskData = {
             task: e.target.taskName.value,
-            description: false,
+            descriptions: [
+                {
+                    text: false,
+                    avatar: false
+                }
+            ],
             descriptionCount: 0,
-            uuid: uuid(),
+            uuid: uuid()
         };
 
         if (e.target.taskName.value.length > 0){
             saveTask(taskData);
         }
-        
-        e.target.taskName.value = '';
 
+        //for displaying changes:
         setData(getTasks());
+
+        //cleaning the input after submit:
+        e.target.taskName.value = '';
     };
 
     return(

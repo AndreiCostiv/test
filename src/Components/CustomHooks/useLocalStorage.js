@@ -26,17 +26,32 @@ const useLocalStorage = () => {
         setTasks(filtred);
     };    
 
+    const getTask = (uuid) => getTasks().filter( (item) => item.uuid === uuid );
+
     const [tasks, setTasks] = useState(getTasks);
 
-    return {
-        tasks, 
-        getTasks, 
-        setTasks, 
-        saveTask, 
-        removeTask
-    };
-};
+    //comments:
 
-// removeTask, reset, saveDescription, getDescriptionCount
+    const getComments = (uuid) => {
+        let comments
+
+        if (getTask(uuid) === undefined) {
+            comments = getTask(uuid)[0].descriptions;  
+        }
+
+        return comments;
+    };
+
+    // const addComment = (uuid, data) => {
+    //     let descriptions = getTask(uuid)[0].descriptions;
+    //     typeof(data) === "object" ? descriptions.push(data) : 
+    //     ''
+    // };
+
+    return {
+        tasks, getTasks, setTasks, saveTask, removeTask,
+        getComments
+    }
+};
 
 export default useLocalStorage;
