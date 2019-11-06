@@ -7,17 +7,24 @@ import * as uuid from 'uuid/v1';
 import useLocalStorage from '../CustomHooks/useLocalStorage';
 
 const NewTasksForm = ({children, setData}) => {
-    const {saveTasks, getTasks} = useLocalStorage();
+    const {saveTask, getTasks} = useLocalStorage();
     
     const HandleSubmit = (e) => {
         e.preventDefault();
-        saveTasks({
+
+        let taskData = {
             task: e.target.taskName.value,
             description: false,
+            descriptionCount: 0,
             uuid: uuid(),
-        });
+        };
+
+        if (e.target.taskName.value.length > 0){
+            saveTask(taskData);
+        }
         
-        //updates task's list after submit:
+        e.target.taskName.value = '';
+
         setData(getTasks());
     };
 
@@ -27,7 +34,7 @@ const NewTasksForm = ({children, setData}) => {
             onSubmit = { HandleSubmit }
             children = {children}    
         />
-    )
+    );
 };
 
 export default NewTasksForm;

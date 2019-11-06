@@ -1,26 +1,40 @@
 import {useState} from 'react';
 
 const useLocalStorage = () => {
-    const getTasks = () => {
+    const getTasks = () => {        
         if (localStorage.getItem('tasks') !== null) {
             return(JSON.parse(localStorage.getItem('tasks')));
         }
-        
-        else return([]);
+        else {
+            localStorage.setItem('tasks', JSON.stringify([]))
+            return([])
+        };
     };
 
-    const saveTasks = (item) => {
-        let newData = tasks;
-        newData.push(item);
-        
-        
+    const saveTask = (item) => {
+        let newData = getTasks();
+        newData.push(item);        
+
         localStorage.setItem('tasks', JSON.stringify(newData));
         setTasks(newData);
     };
 
-    const [tasks, setTasks] = useState(getTasks());
+    const removeTask = (uuid) => {
+        const filtred = getTasks().filter( (item) => item.uuid !== uuid );
 
-    return {tasks, getTasks, setTasks, saveTasks};
+        localStorage.setItem('tasks', JSON.stringify(filtred));
+        setTasks(filtred);
+    };    
+
+    const [tasks, setTasks] = useState(getTasks);
+
+    return {
+        tasks, 
+        getTasks, 
+        setTasks, 
+        saveTask, 
+        removeTask
+    };
 };
 
 // removeTask, reset, saveDescription, getDescriptionCount

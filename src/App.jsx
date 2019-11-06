@@ -38,13 +38,13 @@ const App = () => {
 				</NewTaskForm>
 
 				{data.map(
-					(item, i) =>
-						<TaskItem key = {i}>		
+					(item) =>
+						<TaskItem key = {item.uuid}>		
 							<section className = 'TaskName'>{item.task}</section>
 
-							<NumberedDot number = {3}/>
+							<NumberedDot number = {item.descriptionCount}/>
 							
-							<DeleteBtn />
+							<DeleteBtn uuid = {item.uuid} setData = {setData}/>
 						</TaskItem>
 				)}
 			</Tasks>
