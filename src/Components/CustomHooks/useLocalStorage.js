@@ -1,6 +1,7 @@
 import {useState} from 'react';
 
 const useLocalStorage = () => {
+    // tasks
     const getTasks = () => {        
         if (localStorage.getItem('tasks') !== null) {
             return(JSON.parse(localStorage.getItem('tasks')));
@@ -19,6 +20,11 @@ const useLocalStorage = () => {
         setTasks(newData);
     };
 
+    const SaveUpdatedTasks = (updatedTasksList) => {        
+        localStorage.setItem('tasks', JSON.stringify(updatedTasksList));
+        setTasks(updatedTasksList);
+    };
+
     const removeTask = (uuid) => {
         const filtred = getTasks().filter( (item) => item.uuid !== uuid );
 
@@ -26,31 +32,38 @@ const useLocalStorage = () => {
         setTasks(filtred);
     };    
 
-    const getTask = (uuid) => getTasks().filter( (item) => item.uuid === uuid );
+    const updateTask = (item, uuid) => {
+        const allTasks = getTasks();
+        //Find index of specific object using findIndex method:    
+        const objIndex = allTasks.findIndex((obj => obj.uuid === uuid));
+        
+        //updating:
+        allTasks[objIndex] = item[0]; 
+        SaveUpdatedTasks(allTasks);
+    };
 
     const [tasks, setTasks] = useState(getTasks);
 
     //comments:
-
     const getComments = (uuid) => {
-        let comments
-
-        if (getTask(uuid) === undefined) {
-            comments = getTask(uuid)[0].descriptions;  
-        }
-
-        return comments;
+        let comments = getTasks().filter( (item) => item.uuid === uuid );              
+        if(comments[0] !== undefined) {
+            return comments[0].descriptions;
+        };
     };
 
-    // const addComment = (uuid, data) => {
-    //     let descriptions = getTask(uuid)[0].descriptions;
-    //     typeof(data) === "object" ? descriptions.push(data) : 
-    //     ''
-    // };
+    const addComment = (uuid, data) => {
+        let selectedTask = getTasks().filter( (item) => item.uuid === uuid )
+        //getting comments for selected taks only:
+
+        selectedTask[0].descriptions.push(data);
+        
+        updateTask(selectedTask, uuid);
+    };
 
     return {
         tasks, getTasks, setTasks, saveTask, removeTask,
-        getComments
+        getComments, addComment
     }
 };
 

@@ -14,6 +14,9 @@ import TaskItem from './Components/GeneralComponents/TaskItem';
 import NumberedDot from './Components/GeneralComponents/NumberedDot';
 import DeleteBtn from './Components/GeneralComponents/DeleteBtn'; 
 import Comments from './Components/Comments/Comments';
+import CommentItem from './Components/GeneralComponents/CommentItem';
+import AvatarComponent from './Components/GeneralComponents/AvatarComponent'
+import CommentsArea from './Components/GeneralComponents/CommentsArea';
 
 //custom hooks:
 import useLocalStorage from './Components/CustomHooks/useLocalStorage';
@@ -21,8 +24,9 @@ import useLocalStorage from './Components/CustomHooks/useLocalStorage';
 const App = () => {
 	const {getTasks} = useLocalStorage();
 	const [data, setData] = useState(getTasks());	
-	const [comments, setComments] = useState([]);	
-
+	const [selectedUuid, setSelectedUuid] = useState(false);	
+	const [comments, setComments] = useState(false);
+	
 	return(
 		<section className = 'App'>
 			<DairyAppTitle />
@@ -45,6 +49,7 @@ const App = () => {
 							key = {item.uuid} 
 							uuid = {item.uuid} 
 							setComments = {setComments}
+							setSelectedUuid = {setSelectedUuid}
 						>		
 							<section className = 'TaskName'>{item.task}</section>
 
@@ -55,22 +60,26 @@ const App = () => {
 				)}
 			</Tasks>
 
+			{comments && 
 			<Comments >
 				<CustomHeader 
 					index = {2}
-					content = 
-						{`Comments #${comments !== undefined && comments.length}`} 
-					Class = 'TaskTitle'
+					content = {`Comments #${comments.length}`} 
+					Class = 'CommentsTitle'
 				/>
 
-				{comments !== undefined &&
-				comments.map(
+				{comments.map(
 					(item, i) => 
-						<p key = {i}>
-							{item.text}
-						</p>
+						//Don't forget to pass avatar!!
+						<CommentItem 
+							text = {item.text} key = {i}
+						/>
 				)}
+				<CommentsArea uuid = {selectedUuid} setComments = {setComments}>
+					<AvatarComponent/>
+				</CommentsArea>
 			</Comments>
+			}
 		</section>
 	);
 };

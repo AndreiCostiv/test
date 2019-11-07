@@ -16,8 +16,8 @@ const NewTasksForm = ({children, setData}) => {
             task: e.target.taskName.value,
             descriptions: [
                 {
-                    text: false,
-                    avatar: false
+                    text: 'test',
+                    avatar: '#000'
                 }
             ],
             descriptionCount: 0,

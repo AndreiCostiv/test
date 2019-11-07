@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "http://AndriiKostiv.github.io/test/",
   "dependencies": {
+    "@rooks/use-keys": "^3.4.0",
     "gh-pages": "^2.1.1",
     "node-sass": "^4.13.0",
     "react": "^16.11.0",
