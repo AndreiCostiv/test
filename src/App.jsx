@@ -15,7 +15,6 @@ import NumberedDot from './Components/GeneralComponents/NumberedDot';
 import DeleteBtn from './Components/GeneralComponents/DeleteBtn'; 
 import Comments from './Components/Comments/Comments';
 import CommentItem from './Components/GeneralComponents/CommentItem';
-import AvatarComponent from './Components/GeneralComponents/AvatarComponent';
 import CommentsArea from './Components/GeneralComponents/CommentsArea';
 
 //custom hooks:
@@ -50,6 +49,7 @@ const App = () => {
 							uuid = {item.uuid} 
 							setComments = {setComments}
 							setSelectedUuid = {setSelectedUuid}
+							selectedUuid = {selectedUuid}
 						>		
 							<section className = 'TaskName'>{item.task}</section>
 
@@ -68,16 +68,22 @@ const App = () => {
 					Class = 'CommentsTitle'
 				/>
 
-				{comments.map(
-					(item, i) => 
-						//Don't forget to pass avatar!!
-						<CommentItem 
-							text = {item.text} key = {i}
-						/>
-				)}
-				<CommentsArea uuid = {selectedUuid} setComments = {setComments} setData = {setData}>
-					<AvatarComponent/>
-				</CommentsArea>
+				<section className = 'CommentsContainer'>
+					{comments.map(
+						(item, i) => 
+							//Don't forget to pass avatar!!
+							<CommentItem 
+								avatar = {item.avatar}
+								text = {item.text} key = {i}
+							/>
+					)}
+				</section>
+
+				<CommentsArea 
+					uuid = {selectedUuid} 
+					setComments = {setComments} 
+					setData = {setData}
+				/>
 			</Comments>
 			}
 		</section>

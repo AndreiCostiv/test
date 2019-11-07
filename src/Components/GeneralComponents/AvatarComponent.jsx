@@ -1,8 +1,12 @@
 import React from 'react';
 
-const AvatarComponent = () => {
+const AvatarComponent = ({selectedAvatar, toShowPicker, setToShowPicker}) => {
     return(
-        <button className = 'AvatarComponent' />
+        <button 
+            style = {{backgroundColor: `${selectedAvatar}`}}
+            onClick = {() => setToShowPicker(!toShowPicker)}
+            className = 'AvatarComponent'
+        />
     );
 };
 

@@ -2,8 +2,17 @@ import React from 'react';
 
 const CommentItem = ({avatar, text}) => (
     <section className = 'CommentItem'>
-        {text}
+        <SavadAvatar avatar = {avatar}/>
+        <section className = 'commentText'>
+            {text}
+        </section>
     </section>
 );
+
+const SavadAvatar = ({avatar}) => 
+    <section 
+        className = 'SavadAvatar'
+        style = {{backgroundColor: `${avatar}`}}
+    />
 
 export default CommentItem;
