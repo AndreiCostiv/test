@@ -15,7 +15,7 @@ import NumberedDot from './Components/GeneralComponents/NumberedDot';
 import DeleteBtn from './Components/GeneralComponents/DeleteBtn'; 
 import Comments from './Components/Comments/Comments';
 import CommentItem from './Components/GeneralComponents/CommentItem';
-import AvatarComponent from './Components/GeneralComponents/AvatarComponent'
+import AvatarComponent from './Components/GeneralComponents/AvatarComponent';
 import CommentsArea from './Components/GeneralComponents/CommentsArea';
 
 //custom hooks:
@@ -75,7 +75,7 @@ const App = () => {
 							text = {item.text} key = {i}
 						/>
 				)}
-				<CommentsArea uuid = {selectedUuid} setComments = {setComments}>
+				<CommentsArea uuid = {selectedUuid} setComments = {setComments} setData = {setData}>
 					<AvatarComponent/>
 				</CommentsArea>
 			</Comments>

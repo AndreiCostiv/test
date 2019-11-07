@@ -55,9 +55,11 @@ const useLocalStorage = () => {
     const addComment = (uuid, data) => {
         let selectedTask = getTasks().filter( (item) => item.uuid === uuid )
         //getting comments for selected taks only:
-
         selectedTask[0].descriptions.push(data);
         
+        //counting descriptions:
+        selectedTask[0].descriptionCount++;
+
         updateTask(selectedTask, uuid);
     };
 

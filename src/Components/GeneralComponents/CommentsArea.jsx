@@ -6,8 +6,8 @@ import useLocalStorage from '../CustomHooks/useLocalStorage';
 //packge:
 import useKeys from "@rooks/use-keys";
 
-const CommentsArea = ({uuid, setComments, children}) => {
-    const {addComment, getComments} = useLocalStorage();
+const CommentsArea = ({uuid, setComments, setData, children}) => {
+    const {addComment, getComments, getTasks} = useLocalStorage();
     const containerRef = useRef(document);
     const [isEventActive] = useState(true);
 
@@ -20,6 +20,7 @@ const CommentsArea = ({uuid, setComments, children}) => {
                 addComment(uuid, checkCommet(e.target.value))
                 //for displaying changes:        
                 setComments(getComments(uuid));
+                setData(getTasks());
                 //cleaning up text area:
                 e.target.value = '';
             }else alert('Write some text!');    

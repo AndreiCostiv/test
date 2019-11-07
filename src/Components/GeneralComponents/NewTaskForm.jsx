@@ -14,12 +14,7 @@ const NewTasksForm = ({children, setData}) => {
 
         let taskData = {
             task: e.target.taskName.value,
-            descriptions: [
-                {
-                    text: 'test',
-                    avatar: '#000'
-                }
-            ],
+            descriptions: [],
             descriptionCount: 0,
             uuid: uuid()
         };
