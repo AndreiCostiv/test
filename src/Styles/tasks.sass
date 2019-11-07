@@ -11,6 +11,16 @@
     align-items: flex-start
     justify-content: flex-start
 
+    overflow: auto
+
+    &::-webkit-scrollbar
+        width: 0px   // Remove scrollbar space 
+        background: none  //Optional: just make scrollbar invisible
+
+    /* Optional: show position indicator in red */
+    &::-webkit-scrollbar-thumb
+        background: #fff
+
 .TaskTitle
     margin: 35px 0 22px 0
 

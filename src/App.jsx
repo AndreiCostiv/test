@@ -13,14 +13,19 @@ import SaveTaskBtn from './Components/GeneralComponents/SaveTaskBtn';
 import TaskItem from './Components/GeneralComponents/TaskItem';
 import NumberedDot from './Components/GeneralComponents/NumberedDot';
 import DeleteBtn from './Components/GeneralComponents/DeleteBtn'; 
+import Comments from './Components/Comments/Comments';
+import CommentItem from './Components/GeneralComponents/CommentItem';
+import CommentsArea from './Components/GeneralComponents/CommentsArea';
 
 //custom hooks:
 import useLocalStorage from './Components/CustomHooks/useLocalStorage';
 
 const App = () => {
-	const {tasks} = useLocalStorage();
-	const [data, setData] = useState(tasks);
-
+	const {getTasks} = useLocalStorage();
+	const [data, setData] = useState(getTasks());	
+	const [selectedUuid, setSelectedUuid] = useState(false);	
+	const [comments, setComments] = useState(false);
+	
 	return(
 		<section className = 'App'>
 			<DairyAppTitle />
@@ -39,7 +44,13 @@ const App = () => {
 
 				{data.map(
 					(item) =>
-						<TaskItem key = {item.uuid}>		
+						<TaskItem 
+							key = {item.uuid} 
+							uuid = {item.uuid} 
+							setComments = {setComments}
+							setSelectedUuid = {setSelectedUuid}
+							selectedUuid = {selectedUuid}
+						>		
 							<section className = 'TaskName'>{item.task}</section>
 
 							<NumberedDot number = {item.descriptionCount}/>
@@ -48,6 +59,33 @@ const App = () => {
 						</TaskItem>
 				)}
 			</Tasks>
+
+			{comments && 
+			<Comments >
+				<CustomHeader 
+					index = {2}
+					content = {`Comments #${comments.length}`} 
+					Class = 'CommentsTitle'
+				/>
+
+				<section className = 'CommentsContainer'>
+					{comments.map(
+						(item, i) => 
+							//Don't forget to pass avatar!!
+							<CommentItem 
+								avatar = {item.avatar}
+								text = {item.text} key = {i}
+							/>
+					)}
+				</section>
+
+				<CommentsArea 
+					uuid = {selectedUuid} 
+					setComments = {setComments} 
+					setData = {setData}
+				/>
+			</Comments>
+			}
 		</section>
 	);
 };

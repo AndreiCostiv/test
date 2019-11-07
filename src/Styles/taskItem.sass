@@ -13,7 +13,10 @@
     align-items: center
     justify-content: flex-start
 
-.TaskItemChecked
+    cursor: pointer
+    
+.TaskActive
+    padding:  0 0 0 19px
     border-left: 6px solid#FF2F5A
 
 .TaskName
@@ -67,6 +70,8 @@
     border: 1px solid #FF3159
     border-radius: 5px
 
+    outline: none
+
     background: 
         color: transparent
 
@@ -79,3 +84,8 @@
     font-family: Roboto-regular, sans-serif
     font-size: 15px
     color: #FF3159
+
+    cursor: pointer
+    &:hover
+        color: #fff
+        background-color: #FF3159
