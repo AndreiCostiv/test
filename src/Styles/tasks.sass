@@ -1,0 +1,27 @@
+.Tasks
+    width: 440px
+    height: 620px
+
+    margin: 50px 0 0 50px
+
+    box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.25), -2px 0px 5px rgba(0, 0, 0, 0.25)
+
+    display: flex
+    flex-direction: column
+    align-items: flex-start
+    justify-content: flex-start
+
+    overflow: auto
+
+    &::-webkit-scrollbar
+        width: 0px   // Remove scrollbar space 
+        background: none  //Optional: just make scrollbar invisible
+
+    /* Optional: show position indicator in red */
+    &::-webkit-scrollbar-thumb
+        background: #fff
+
+.TaskTitle
+    margin: 35px 0 22px 0
+
+    color: #565A69
