@@ -9,7 +9,7 @@ const TaskItem = ({children, uuid, setComments, setSelectedUuid, selectedUuid}) 
 
     React.useEffect(() => {
         uuid === selectedUuid ? setIsActive(true) : setIsActive(false) 
-    }, [selectedUuid])
+    }, [selectedUuid, uuid])
 
     const setUpData = (uuid)=> {
         setSelectedUuid(uuid);
