@@ -6,11 +6,11 @@
   "dependencies": {
     "@rooks/use-keys": "^3.4.0",
     "gh-pages": "^2.1.1",
-    "node-sass": "^4.13.0",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-scripts": "3.2.0",
     "react-spring": "^8.0.27",
+    "sass": "^1.32.11",
     "uuid": "^3.3.3"
   },
   "scripts": {
